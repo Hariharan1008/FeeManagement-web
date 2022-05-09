@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        .registration{
+            margin-left: 430px;
+            margin-top: 60px;
+        }
+        div{
+           
+            padding:5px;
+        }
+        input{
+
+            width:100%;
+            box-sizing: border-box;
+            padding:2px;
+            border:none;
+
+        }
+        .card-reg
+        {
+            /* background-image:url("pexels-jeremy-bishop-2422915.jpg"); */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 50%;
+            height:80%;
+            margin-top: 1px;
+
+        } 
+        body{
+            /* background-image: url("pexels-jeremy-bishop-2422915.jpg"); */
+            background-size:cover;
+        }
+        .card-reg:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        #submit{
+            margin-left: 160px;
+            width:30%;
+            max-height: max-content;
+        }
+        #hostelCheck{
+            margin-left: 525px;
+            margin-top: 150px;
+        }
+        .card-h{
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 40%;
+            height:relative;
+            margin-top: 1px;
+
+        }
+        .card-wal{
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 40%;
+            height:relative;
+            margin-top:100px;
+            margin-left:400px;
+            
+        }
+        #loading{
+            margin-left:200px;
+        }
+        #result{
+            margin-left:195px;
+        }
+         #sub{
+            margin-left: 175px;
+            width:40%;
+            max-height: max-content;
+        }
+         #submit-wal{
+            margin-left: 390px;
+            width:20%;
+            max-height: max-content;
+            margin-top:10px;
+            margin-bottom:5px;
+            
+            
+        }
+        #wal-loading{
+            padding-top:15px;
+            margin-left:230px;
+            
+        }
+        #hostel-loading{
+          
+            margin-left:240px;
+            
+        }
+        #result-ver
+        {
+            margin-left:250px;
+
+        }
+        #result-reg{
+            margin-left:230px;
+
+        }
+        #result-wal{
+             margin-left:230px;
+
+        }
+
+
+    </style>
+         
+</head>
+
+<body>
+<section class="registration" id="registrationDetails" style="display:block;">
+  <form onsubmit="registerValidation()" id="regForm">
+    
+        <div class="card-reg">
+        <div>
+            <input type="text" name="name" id="name" placeholder="Enter name" required autofocus>
+        </div>
+       <hr>
+        <div>
+            <input type="text" name="username" id="username" placeholder="Enter username" required autofocus>
+        </div>
+        <hr>
+        <div>
+            <input type="number" name="mobile" id="mobile" placeholder="Enter mobile" required autofocus>
+        </div>
+        <hr>
+        <div>
+            <input type="text" name="age" id="age" placeholder="Enter age" required autofocus>
+        </div>
+        <hr>
+        <div>
+            <input type="email" name="email" id="email" placeholder="Enter email" required autofocus>
+        </div>
+        <hr>
+        <div>
+            <input type="text" name="password" id="password" placeholder="Enter password" required autofocus>
+        </div>
+       
+        <div id="loading" style="display:none;">
+            <img src="a2dc9668f2cf170fe3efeb263128b0e7.gif" style=" width:20%;">
+
+        </div>
+        <span id="result-ver"></span>
+        <div id="submitButton" style="display:block;">
+           
+            <button  type="submit" name="submit" id="submit">Register</button>
+        </div>
+    </div>
+   
+        
+  </form>
+</section>
+<section id="hostelCheck" style="display:none;">
+  <div class="card-h">
+    <form onsubmit="hostelOrDayscholar()">
+          <div id="yearOfStudy">
+            <select class="form-select" aria-label="Default select example" id="year">
+                <option selected>Year</option>
+                <option value="1">1st year</option>
+                <option value="2">2nd year</option>
+                <option value="3">3rd year </option>
+                <option value="4">4th year</option>
+               
+                </select>
+            </div> 
+            <hr>
+            <div>
+            <select class="form-select" aria-label="Default select example" id="branch">
+                <option selected>Branch</option>
+                <option value="CSE">Computer science engineering</option>
+                <option value="EEE">Electrical and electronics engineering</option>
+                 <option value="ECE">Electrical and communication engineering</option>
+                 <option value="MECH">Mechanical engineering</option>
+                  <option value="CIVIL">Civil engineering</option>
+            </select>
+            </div>
+            <hr>
+            <div>
+           
+              <select class="form-select" aria-label="Default select example"  id="hOrD" onchange="busCheck()">
+                    <option selected>Hostel or Dayscholar</option>
+                    <option value="H">Hosteller</option>
+                    <option value="D">DayScholar</option>
+                </select>
+            </div>
+            <div id="buscheck" style="display:none">
+                    <label for="bus">Need Bus</label>
+                     <select class="form-select" aria-label="Default select example"  name="bus" id="bus" onchange="busCheck()"">
+                      
+                          <option value="Yes">Yes</option>
+                          <option value="No">No</option>
+                      </select>
+            </div>
+            <span id="result-reg"></span>
+            <div id="hostel-sub" style="display:block">
+                <button type="submit" id="sub" name="sub">Finish</button>
+            </div>
+            <div id="hostel-loading" style="display:none;">
+                <img src="a2dc9668f2cf170fe3efeb263128b0e7.gif" style=" width:40%;">
+            </div>
+     </form>
+    </div>
+
+</section>
+<section id="wallet" style="display:none;">
+ <div class=card-wal>
+    <h4><i>wallet created successfully!!</i></h4> 
+    <h5><i>please set transaction pin</i></h5>
+    <hr>
+    <form onsubmit="setWallet()">
+             <div class="input-group mb-3">
+                <input type="number" class="form-control" id="tpin" name="tpin" placeholder="Enter transction pin" aria-label="Enter transction pin" aria-describedby="button-addon2" required>
+             </div>
+          <hr>
+      <div id="wal-submit" style="display:block">
+        <button type="submit" class="btn btn-primary" name="submit-wal" id="submit-wal">Set</button>
+     </div>
+     <span id="result-wal"></span>
+     <div id="wal-loading" style="display:none;">
+        <img src="a2dc9668f2cf170fe3efeb263128b0e7.gif" style=" width:15%;">
+    </div>
+    </form>
+ </div>
+</section>
+
+  <script>
+  
+      function registerValidation()
+     {
+    	 event.preventDefault();
+         let submitButton=document.querySelector("#submitButton");
+         submitButton.style.display='none';
+         let loading=document.querySelector("#loading");
+         loading.style.display='block';
+         let registrationTab=document.querySelector("#registrationDetails");
+         let hostelTab=document.querySelector("#hostelCheck");
+         var name=document.querySelector("#name").value;
+         var userName=document.querySelector("#username").value;
+         var mobile=document.querySelector("#mobile").value;
+         var age=document.querySelector("#age").value;
+         var email=document.querySelector("#email").value;
+         var password=document.querySelector("#password").value;
+         let regForm=document.querySelector("#regForm");
+         const url="http://localhost:9000/register/verification?name="+name+"&userName="+userName+"&mobile="+mobile+"&age="+age+"&email="+email+"&password="+password;
+         fetch(url).then(res=>res.text()).then(res=>{
+        	 let registered=res;
+             loading.style.display='none';
+             if(registered.trim()=="successfull")    
+             {
+                 let result=document.querySelector("#result-ver");
+                 result.innerHTML="Success";
+                 setTimeout(function(){registrationTab.style.display='none';hostelTab.style.display='block';},2000);
+                 
+             }
+             else{
+                document.querySelector("#result-ver").innerHTML=res;
+                setTimeout(function(){window.location.reload();},2000);
+               
+                
+             }     
+        });
+        
+     }
+     function hostelOrDayscholar()
+     {
+    	 event.preventDefault();
+         let submitButton=document.querySelector("#hostel-sub");
+         submitButton.style.display='none';
+         let loading=document.querySelector("#hostel-loading");
+         loading.style.display='block';
+    	 let hostelTab=document.querySelector("#hostelCheck");
+         var name=document.querySelector("#name").value;
+         var userName=document.querySelector("#username").value;
+         var mobile=document.querySelector("#mobile").value;
+         var age=document.querySelector("#age").value;
+         var email=document.querySelector("#email").value;
+         var password=document.querySelector("#password").value;
+         var year=document.querySelector("#year").value;
+         var branch=document.querySelector("#branch").value;
+         var hostelCheck=document.querySelector("#hOrD").value;
+         if(hostelCheck=="H")
+         {
+             needBus="No";
+         }
+         else{
+            var needBus=document.querySelector("#bus").value;
+         }
+         const url="http://localhost:9000/register/insertion?name="+name+"&userName="+userName+"&mobile="+mobile+"&age="+age+"&email="+email+"&password="+password+"&year="+year+"&branch="+branch+"&hostelCheck="+hostelCheck+"&bus="+needBus;
+          fetch(url).then(res=>res.text()).then(res=>{
+            console.log(res);
+            loading.style.display='none';
+            let completed=document.querySelector("#result-reg");
+            completed.innerHTML="Successful!!";
+            localStorage.setItem("sessionEmail",email);
+            localStorage.setItem("sessionMobile",mobile);
+            let walletTab=document.querySelector("#wallet");
+            setTimeout(function(){hostelTab.style.display='none';walletTab.style.display='block';},2000);
+            //alert(res);
+         });
+     }
+     function busCheck()
+     {
+    	 event.preventDefault();
+         let hOrD=document.querySelector("#hOrD").value;
+         if(hOrD=="D")
+         {
+             let buscheck=document.querySelector("#buscheck");
+             buscheck.style.display='block';
+         }
+        
+
+     }
+     function setWallet()
+     {
+         event.preventDefault();
+         let submitButton=document.querySelector("#wal-submit");
+         submitButton.style.display='none';
+         let loading=document.querySelector("#wal-loading");
+         loading.style.display='block';
+         var name=document.querySelector("#name").value;
+         var mobile=document.querySelector("#mobile").value;
+         var tpin=document.querySelector("#tpin").value;
+         const url="http://localhost:9000/wallet/registration?name="+name+"&mobile="+mobile+"&tpin="+tpin;
+         fetch(url).then(res=>res.text()).then(res=>{
+             console.log(res);
+             loading.style.display='none';
+             let walletResult=document.querySelector("#result-wal");
+             walletResult.innerHTML=res;
+             setTimeout(function(){window.location.href="feesStatus.html";},2000);
+             
+         });
+     }
+  </script>
+    
+  
+</body>
+
+</html>

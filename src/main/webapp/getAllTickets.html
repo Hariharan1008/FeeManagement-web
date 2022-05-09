@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <style>
+            th{
+                width:10%;
+            }
+            td{
+            width:10%;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Fee Management-Admin</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="updateFeesStructure.html">Update Fees</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="updateProduct.html">Update product Points</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="getAllTickets.html">Update tickets</a>
+                </li>
+                 <li class="nav-item active">
+                <a class="nav-link" href="logout.html">Logout<span id="notification"></span><span class="sr-only"></span></a>
+              </li>
+              </ul>
+            </div>
+          </nav>
+        <section id="allTickets">
+            <table border="">
+                <thead>
+                    <tr>
+                        <th>Ticket Id</th>
+                        <th>Query</th>
+                        <th>Raised By</th>
+                        <th>Created On</th>
+                        <th>Ticket status</th>
+                        <th>update</th>
+                    </tr>
+                </thead>
+                <tbody id="display">
+                </tbody>
+            </table>
+            <span id="result"></span>
+
+        </section>
+        <script>
+        function verifyLogin()
+        {
+        	let email=localStorage.getItem("sessionEmail");
+        	if(email=="null")
+        	{
+        		alert("please login");
+        		window.location.href="LoginForm.html";
+        	}
+        }
+        verifyLogin();
+            function getAllTickets()
+            {
+                let tickets=null;
+                let content="";
+                let email=localStorage.getItem("sessionEmail");
+                const url="http://localhost:9000/ticket/get/all";
+                fetch(url).then(res=>res.json()).then(res=>{
+                    tickets=res;
+                    console.log(tickets);
+                    for(ticket of tickets)
+                    {
+                        content=content+`<tr><td style="text-align:center;">${ticket.ticketId}</td><td style="text-align:center;">${ticket.myQuery}</td><td style="text-align:center;">${ticket.email}</td><td style="text-align:center;">${ticket.createdOn}</td><td style="text-align:center;">${ticket.ticketStatus}</td><td style="text-align:center;"><button type="button" onclick="updateTicket('${ticket.myQuery}',${ticket.id},'${ticket.email}')">update</button></td></tr>`;
+                       
+                    }
+                    document.querySelector("#display").innerHTML=content;
+                });
+            }
+            function updateTicket(query,id,email)
+            {
+                event.preventDefault();
+                console.log(email);
+                let updated=null;
+                const url1="http://localhost:9000/ticket/update?id="+id+"&query="+query+"&email="+email;
+                fetch(url1).then(res1=>res1.text()).then(res1=>{
+                    updated=res1;
+                    if(updated.trim()=="success")
+                    {
+                        document.querySelector("#result").innerHTML="successfully updated";
+                    }
+                    else{
+                        document.querySelector("#result").innerHTML="updation failed";
+                    }
+
+
+                });
+                
+            }
+            getAllTickets();
+            </script>
+    </body>
+</html>

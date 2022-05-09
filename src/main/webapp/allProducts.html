@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<style type="text/css">
+    #points{
+      width:50%;
+      margin-left:350px;
+    }
+		
+	</style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="feesStatus.html">FeeManagement</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                         Fees
+                     </a>
+                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                       <li><a class="dropdown-item" href="feesStructure.html">Fees Structure</a></li>
+                       <li><a class="dropdown-item" href="feesStatus.html">Fees Status</a></li>                      
+                     </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Fees Transactions
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="allTransactionDetails.html">All Transactions</a></li>
+                      <li><a class="dropdown-item" href="transactionDetailsUsingId.html">Find Transaction</a></li>
+                      
+                    </ul>
+                 </li>
+                 <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Tickets
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="ticketRaising.html">Raise a Ticket</a></li>
+                    <li><a class="dropdown-item" href="FindAllTickets.html">All Tickets</a></li>
+                    <li><a class="dropdown-item" href="TicketDetailsUsingId.html">Find Ticket</a></li> 
+                  </ul>
+               </li>                
+                  <!-- <li class="nav-item active">
+                    <a class="nav-link" href="addMoneyToWallet.html">addMoneyToWallet<span class="sr-only"></span></a>
+                  </li> -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Wallet
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="addMoneyToWallet.html">Add Money</a></li>
+                      <li><a class="dropdown-item" href="payFeesUsingWallet.html">Pay Fees</a></li>
+                      <li><a class="dropdown-item" href="walletTransactions.html">Wallet Transactions</a></li> 
+                    </ul>
+                 </li>   
+                 <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Fund Transfer
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="fundTransfer.html">Send Money</a></li>
+                    <li><a class="dropdown-item" href="fundTransactions.html">Fund Transactions</a></li>
+                  </ul>
+               </li>   
+               <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Shop
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="allProducts.html">Shop and buy</a></li>
+                  <li><a class="dropdown-item" href="myProducts.html">My Products</a></li>
+                </ul>
+              </li>   
+              <li class="nav-item active">
+                <a class="nav-link" href="notifications.html">Notifications<span id="notification"></span><span class="sr-only"></span></a>
+              </li>
+               <li class="nav-item active">
+                <a class="nav-link" href="logout.html">Logout<span id="notification"></span><span class="sr-only"></span></a>
+              </li>
+              </ul>
+            </div>
+          </nav>
+      <section style="display:none;" id="points">
+        <div class="alert alert-primary d-flex align-items-center" role="alert" >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+          <div id="lessPoints">
+            
+          </div>
+        </div>
+      </section>
+        
+        <section id="allProducts" style="display:block">
+         <h5 style="text-align:center;"><i><b>All products</b></i></h5>
+            <div class="row" id="display">
+                
+            </div>
+        </section>
+        
+   
+   
+        <script>
+        function verifyLogin()
+        {
+        	let email=localStorage.getItem("sessionEmail");
+        	if(email=="null")
+        	{
+        		alert("please login");
+        		window.location.href="LoginForm.html";
+        	}
+        }
+        verifyLogin();
+            function getAllProducts()
+            {
+                const url="http://localhost:9000/products/allProducts";
+                fetch(url).then(res=>res.json()).then(res=>{
+                    products=res;
+                    let content="";
+                    for(product of products)
+                    {
+                            console.log(product);
+                            content=content+`<div id="item" class="col-3" style="padding:30px;" >
+                                               <div class="card" style="width:18rem;">
+                                                   <img class="card-img-top" src="${product.imageUrl}" width:"100px" height="150px" alt="Card image cap">
+                                                  <div class="shadow p-3 mb-0 bg-body rounded">
+                                                        <h5 class="card-title" style="text-align:center">${product.name}</h5>
+                                                        <p class="card-text" style="text-align:center">${product.walletPoints} pts</p>
+                                                        <a class="btn btn-primary" style="margin-left:100px" onclick="buyProduct(${product.id})">Buy</a>                                              
+                                                  </div>
+                                                </div>
+                                            </div>`;
+                    }
+                    let display=document.querySelector("#display");
+                    display.innerHTML=content;
+                });
+            }
+            function buyProduct(productId)
+            {
+                let sessionMobile=localStorage.getItem("sessionMobile");
+                let result=document.querySelector("#verify-productId");
+            	const url="http://localhost:9000/procducts/verifyPoints?productId="+productId+"&mobile="+sessionMobile;
+                fetch(url).then(res=>res.text()).then(res=>{
+                    let validPoints=res;
+                    if(validPoints.trim()=="valid")
+                    {
+                        window.location.href="buyProduct.html?id="+productId;
+                    }
+                    else
+                    {
+                        document.querySelector("#points").style.display="block";
+                        document.querySelector("#lessPoints").innerHTML="insufficient points";
+                        setTimeout(function(){document.querySelector("#points").style.display="none";},3000);
+                    }
+                });
+            
+            }
+            getAllProducts();
+            function notifications()
+           {
+           let mobile=localStorage.getItem("sessionMobile");
+           const url1="http://localhost:9000/notification/get/all?mobile="+mobile;
+           let not=null;
+           fetch(url1).then(res1=>res1.json()).then(res=>{
+            not=res;
+            console.log(not);
+            let len=not.length;
+            document.querySelector("#notification").innerHTML="("+len+")";
+           });
+         }
+         notifications();
+                        
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+</html>

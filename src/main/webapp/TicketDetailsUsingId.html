@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <style>
+            section{
+                margin-top:30px;
+            }
+            #ticketsTable{
+            margin-top: 30px;
+            
+            }
+           #loading{
+            margin-top:250px;
+            margin-left: 600px;
+           }
+           #submitButton{
+            /* margin-top:30px; */
+            padding :5px;
+            margin-left: 30px;
+
+           }
+           th{
+           padding-right:90px;
+           padding-left:90px;
+           }
+           td{
+            padding-right:100px;
+           padding-left:100px;
+           }
+           th, td {
+  border-bottom: 1px solid #ddd;
+  }
+        </style>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="feesStatus.html">FeeManagement</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                         Fees
+                     </a>
+                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                       <li><a class="dropdown-item" href="feesStructure.html">Fees Structure</a></li>
+                       <li><a class="dropdown-item" href="feesStatus.html">Fees Status</a></li>                      
+                     </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Fees Transactions
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="allTransactionDetails.html">All Transactions</a></li>
+                      <li><a class="dropdown-item" href="transactionDetailsUsingId.html">Find Transaction</a></li>
+                      
+                    </ul>
+                 </li>
+                 <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Tickets
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="ticketRaising.html">Raise a Ticket</a></li>
+                    <li><a class="dropdown-item" href="FindAllTickets.html">All Tickets</a></li>
+                    <li><a class="dropdown-item" href="TicketDetailsUsingId.html">Find Ticket</a></li> 
+                  </ul>
+               </li>                
+                  <!-- <li class="nav-item active">
+                    <a class="nav-link" href="addMoneyToWallet.html">addMoneyToWallet<span class="sr-only"></span></a>
+                  </li> -->
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Wallet
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="dropdown-item" href="addMoneyToWallet.html">Add Money</a></li>
+                      <li><a class="dropdown-item" href="payFeesUsingWallet.html">Pay Fees</a></li>
+                      <li><a class="dropdown-item" href="walletTransactions.html">Wallet Transactions</a></li> 
+                    </ul>
+                 </li>   
+                 <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Fund Transfer
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="fundTransfer.html">Send Money</a></li>
+                    <li><a class="dropdown-item" href="fundTransactions.html">Fund Transactions</a></li>
+                  </ul>
+               </li>   
+               <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Shop
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item" href="allProducts.html">Shop and buy</a></li>
+                  <li><a class="dropdown-item" href="myProducts.html">My Products</a></li>
+                </ul>
+              </li>   
+              <li class="nav-item active">
+                <a class="nav-link" href="notifications.html">Notifications<span id="notification"></span><span class="sr-only"></span></a>
+              </li>
+               <li class="nav-item active">
+                <a class="nav-link" href="logout.html">Logout<span id="notification"></span><span class="sr-only"></span></a>
+              </li>
+              </ul>
+            </div>
+          </nav>
+      <section id="ticketIdSelector" style="display:block">
+        <form onsubmit="ticketDetailsUsingId()">
+            <input type="number" name="ticketId" id="ticketId" placeholder="Enter your ticket id" required>
+            <div id="loading" style="display:none;">
+                <img src="a2dc9668f2cf170fe3efeb263128b0e7.gif" style=" width:15%;">
+            </div>
+            <div id="submitButton" style="display:block">
+                <button  type="submit" name="submit" id="submit">Find Tickets</button>
+            </div>
+            <span id="noRecords"></span>
+        </form>
+    </section>
+    <section id="ticketsTable" style="display:none;">
+        <table border=1>
+            <thead>
+                <tr>
+                    <th>Ticket Id</th>
+                    <th>Name</th>
+                    <th>Query</th>
+                    <th>Created On</th>
+                    <th>Ticket status</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="display">
+                
+            </tbody>
+        </table>
+    </section> 
+        <script>
+        function verifyLogin()
+        {
+        	let email=localStorage.getItem("sessionEmail");
+        	if(email=="null")
+        	{
+        		alert("please login");
+        		window.location.href="LoginForm.html";
+        	}
+        }
+        verifyLogin();
+            function ticketDetailsUsingId()
+            {
+            	event.preventDefault();
+                let ticketId=document.querySelector("#ticketId").value;
+                let submitButton=document.querySelector("#submitButton");
+                submitButton.style.display='none';
+                let loading=document.querySelector("#loading");
+                loading.style.display='block';
+                let selector=document.querySelector("#ticketIdSelector");
+                let displayTable=document.querySelector("#ticketsTable");
+                const url="http://localhost:9000/transaction/ticket/ticketId";
+                fetch(url).then(res=>res.json()).then(res=>
+                {
+                    let ticket=res;
+                    console.log(ticket);
+                    if(ticket!=null)
+                    {
+                      let content="";
+                       content=content+`<tr><td>${ticket.ticketId}</td><td>${ticket.name}</td><td>${ticket.myQuery}</td><td>${ticket.createdOn}</td><td>${ticket.ticketStatus}</td></tr>`;
+                        selector.style.display='none';
+                        displayTable.style.display='block';
+                        display.innerHTML=content;
+                    }
+                    // 
+                    else
+                    {
+                        loading.style.display='none';
+                        let noRecords=document.querySelector("#noRecords");
+                        noRecords.innerHTML="no records found";
+                        setTimeout(function(){window.location.reload();},1000);
+
+                    }
+                });
+            }
+            function notifications()
+           {
+           let mobile=localStorage.getItem("sessionMobile");
+           const url1="http://localhost:9000/notification/get/all?mobile="+mobile;
+           let not=null;
+           fetch(url1).then(res1=>res1.json()).then(res=>{
+            not=res;
+            console.log(not);
+            let len=not.length;
+            document.querySelector("#notification").innerHTML="("+len+")";
+           });
+         }
+         notifications();
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+</html>

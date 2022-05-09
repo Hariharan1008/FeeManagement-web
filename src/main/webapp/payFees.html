@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class="topnav">
+
+            <a class="active" href="feesStatus.html">feesStatus</a>
+            <a href="feesStructure.html">feesStructure</a>
+            <a href="addMoneyToWallet.html">addMoneyToWallet</a>
+            <a href="allTransactionDetails.html">allTransactionDetails</a>
+            <a href="FindAllTickets.html">FindAllTickets</a>
+            <a href="fundTransfer.html">fundTransfer</a>
+            <a href="LoginForm.html">LoginForm</a>
+            <a href="payFees.html">payFees</a>
+            <a href="payFeesUsingWallet.html">payFeesUsingWallet</a>
+            <a href="registrationForm.html">registrationForm</a>
+            <a href="TicketDetailsUsingId.html">TicketDetailsUsingId</a>
+            <a href="transactionDetailsUsingId.html">transactionDetailsUsingId</a>
+          </div>
+        <section id="payFees-inputs">
+            <form onsubmit="getSessionEmail()" id="getAmount">
+                <input type="number" id="amount" name="amount" required placeholder="Enter amount to pay">
+                <button type="submit" id="submit" name="submit">Pay</button>
+            </form>
+        </section>
+        <script>
+            function getSessionEmail()
+            {
+                var amount=document.querySelector("#amount").value;
+                var sessionEmail=null;
+                const url1="http://localhost:8080/feesmanagement_web/SessionServlet";
+                fetch(url1).then(res1=>res1.json()).then(res1=>{
+                     sessionEmail=res1;
+                     console.log(sessionEmail);
+                     verifyFees(sessionEmail);
+                });
+
+            }
+            function verifyFees(email)
+            {
+                var amount=document.querySelector("#amount").value;
+                const url="http://localhost:8080/feesmanagement_web/PayFeesValidatorServlet?amount="+amount+"&email="+email;
+                fetch(url).then(res=>res.json()).then(res=>{
+                    let verification=res;
+                    if(verification=="Success");
+                    {
+                        payFees(email);
+                    }
+                });
+            }
+            function payFees(email)
+            {
+                var amount=document.querySelector("#amount").value;
+                const url="http://localhost:8080/feesmanagement_web/PayFeesUpdatorServlet?amount="+amount+"&email="+email;
+                fetch(url).then(res=>text()).then(res=>{
+                    console.log(res);
+                })
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class="container-fluid" id="allButtons">
+            <button onclick="feesStatus()">Show all</button>
+            <button  onclick="findTransactionDetails()">Cars</button>
+        </div>
+        
+        <section id="feesStatusTable" style="display:none;">
+            <div class="card">
+              <table>
+                  <thead>
+                      <tr>
+                          <th>Total fee</th>
+                          <th>Paid fee</th>
+                          <th>Pending fee</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                      <tr id="display">
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+        </section>
+        <section id="transactionTable" style="display:none;">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Paid amount</th>
+                        <th>Paid on</th>
+                    </tr>
+                </thead>
+                <tbody id="display">   
+                </tbody>
+            </table>
+        </section> 
+   
+    <script>
+        function feesStatus()
+        {
+        	// event.preventDefault();
+            // let submitButton=document.querySelector("#submitButton");
+            // submitButton.style.display='none';
+            let loading=document.querySelector("#loading");
+            loading.style.display='block';
+            let selectorSection=document.querySelector("#feeStatusSelector");
+            let displaySection=document.querySelector("#feesStatusTable");
+            
+            //let email=document.querySelector("#email").value;
+            const url="http://localhost:8080/feesmanagement_web/FeesStatusServlet";
+            fetch(url).then(res=>res.json()).then(res=>{
+                let fee=res;
+                console.log(fee);
+                let fees=document.querySelector("#display");
+                let content="";
+                content  =content+`<td>${fee.totalFees}</td><td>${fee.feesPaid}</td><td>${fee.feesPending}</td>`;
+                selectorSection.style.display="none";
+                displaySection.style.display="block";
+                fees.innerHTML=content;
+
+            });
+        }
+        function findTransactionDetails()
+            {
+            	//event.preventDefault();
+                // let email=document.querySelector("#email").value;
+               // let submitButton=document.querySelector("#submitButton");
+                //submitButton.style.display='none';
+                let loading=document.querySelector("#loading");
+                loading.style.display='block';
+                const url="http://localhost:8080/feesmanagement_web/AllTransactionDetailsServlet";
+                fetch(url).then(res=>res.json()).then(res=>{
+                    let transactions=res;
+                    console.log(transactions);
+                    if(transactions.length>0)
+                    {
+                      let fees=document.querySelector("#display");
+                      let content="";
+                     for(let transaction of transactions)
+                    	{
+                            content=content+`<tr><td>${transaction.paidAmount}</td><td>${transaction.paidOn}</td></tr>`;  
+                    	}
+                        let findTransactions=document.querySelector("#findTransactions");
+                        let transactionTable=document.querySelector("#transactionTable");
+                        findTransactions.style.display='none';
+                        transactionTable.style.display='block';
+                        fees.innerHTML=content;
+                    }
+                    else{
+                        loading.style.display='none';
+                        let noRecords=document.querySelector("#noRecords");
+                        noRecords.innerHTML="no records found";
+                        //setTimeout(function(){window.location.reload();},2000);
+                    }
+                });
+            }
+    </script>
+
+    </body>
+</html>

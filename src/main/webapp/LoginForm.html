@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .login {
+               margin-top:200px;
+               margin-left:550px;
+               margin-bottom:100px;
+               margin-right:500px;
+           }
+           .demo{
+               color: red;
+           }
+           #email
+           {
+              
+               margin-left :40px;
+           }
+           #password
+           {
+               margin-left :40px;
+           }
+            div {
+              width: 250px;
+              padding: 2px;
+              margin: 2px;
+               }
+               #submit
+               {
+                   text-align:center ;
+                   margin-left :90px;
+                   background-color:rosybrown;
+               }
+               body{
+                   background-image: url("pexels-todd-trapani-1420440.jpg");
+                  
+                   /* height: 100%;
+                   width: 100%; */
+                   background-size:cover; 
+                   background-repeat: no-repeat;
+                   background-position: right top;
+                   margin-right: 200px;
+                   background-attachment: scroll;
+               }
+               .card{
+                   
+                   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                   transition: 0.3s;
+                   width: relative;
+                   height:500;
+                   margin-top: 100px;
+               }
+           
+               .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+               }
+               input{
+                 width:relative;
+                box-sizing: border-box;
+               
+               }
+                #loading{
+                  
+                   margin-left: 102px;
+                   backface-visibility: hidden;
+           
+               }
+               #result
+               {
+                   margin-left:70px;
+               }
+           
+        </style>
+    </head>
+    
+    <body>
+        <section class="login" >
+            <div class="card">
+            
+                <img src="man-key-near-computer-account-260nw-1499141258.webp" width="100%" length="5%">
+               <form onsubmit="validation()" method="post">
+            <div id="emailInput">
+                <input type="email" name="email" id="email"
+                placeholder="Enter your email" required><span id="emailError"></span>
+            </div>
+            <div id="passwordInput">
+                <input type="password" name="password" id="password"
+                placeholder="Enter password" required><span id="passwordError"></span>
+            </div>
+              <div id="loading" style="display:none;">
+                <img src="a2dc9668f2cf170fe3efeb263128b0e7.gif" style=" width:15%;">
+            </div>
+            <div id="formsubmit" style="display:block;">
+               <span id="msg"></span> 
+               <button type="submit" name="submit" id="submit">LOGIN</button>
+            </div>
+            <div>
+                <a href="forgotPassword.html" style="margin-left:130px;">forgot password</a>
+            </div>
+            <span id="result"></span>
+           
+            
+        
+             </form>
+            </div>
+            
+            
+    </section>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script >
+function checkSession()
+{
+    let email=localStorage.getItem("sessionEmail");
+    if(email!="null" && email!="hari@gmail.com")
+    {
+        window.location.href="feesStatus.html";
+    }
+    else if(email!="null" && email=="hari@gmail.com")
+    {
+        window.location.href="updateFeesStructure.html";
+
+    }
+}
+checkSession();
+function validation()
+{
+    event.preventDefault();               
+    let email=document.querySelector("#email").value;
+    let password=document.querySelector("#password").value;
+    let paswordError=document.querySelector("#passwordError");
+    let emailError=document.querySelector("#emailError");
+
+    if(email.includes("@") && password.length>=8)
+    {
+         let loading=document.querySelector("#loading");
+         loading.style.display='block';
+         let formsubmit=document.querySelector("#formsubmit")
+         formsubmit.style.display='none';
+         const url="http://localhost:9000/user/login?email="+email+"&password="+password;
+         fetch(url).then(res=>res.text()).then(res=>{
+         let valid=res;
+         console.log(valid);
+         if(valid.trim()=="Welcome")
+        {
+          localStorage.setItem("sessionEmail",email);
+          console.log(localStorage.getItem("sessionEmail"));
+          let mobile=null;
+          const url1="http://localhost:9000/user/sessionMobile?email="+email;
+          fetch(url1).then(res1=>res1.json()).then(res1=>{
+        	 mobile=res1;
+        	 localStorage.setItem("sessionMobile",mobile);
+        	 loading.style.display='none';
+             let result=document.querySelector("#result");
+             result.innerHTML=res;
+             if(email!="hari@gmail.com")
+             {
+               setTimeout(function(){window.location.href="feesStatus.html";},1000);
+             }
+             else{
+                setTimeout(function(){window.location.href="updateFeesStructure.html";},1000);
+             }
+          });
+          //loading.style.display='none';
+          //let result=document.querySelector("#result");
+          //result.innerHTML=res;
+          //setTimeout(function(){window.location.href="feesStatus.html";},1000);
+        }
+        else{
+        	loading.style.display='none';
+            result.innerHTML=res;
+            setTimeout(function(){window.location.reload();},1000);
+           
+        }
+       });
+       
+       
+    }
+    else
+    {
+        paswordError.innerHTML="invalid"
+    }
+}
+
+ 
+        </script>
+           
+            
+        
+    </body>
+
+</html>

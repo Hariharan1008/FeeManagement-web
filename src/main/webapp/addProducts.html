@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        
+        <section>
+            <form onsubmit="addProduct()">
+                <input type="text" name="name" id="name" placeholder="enter product name" required>
+                <input type="number" name="price" id="price" placeholder="enter product price" required>
+                <input type="number" name="points" id="points" placeholder="enter product points" required>
+                <input type="text" name="category" id="category" placeholder="enter product category" required>
+                <input type="text" name="type" id="type" placeholder="enter product type" required>
+                <input type="text" name="brand" id="brand" placeholder="enter product brand" required>
+                <input type="text" name="image" id="image" placeholder="enter product image url" required>
+            </form>
+            <span id="saved"></span>
+        </section>
+        <script>
+        function verifyLogin()
+        {
+        	let email=localStorage.getItem("sessionEmail");
+        	if(email=="null")
+        	{
+        		alert("please login");
+        		window.location.href="LoginForm.html";
+        	}
+        }
+        verifyLogin();
+            function addProduct()
+            {
+                event.preventDefault();
+                let name=document.querySelector("#name").value;
+                let price=document.querySelector("#price").value;
+                let points=document.querySelector("#points").value;
+                let category=document.querySelector("#category").value;
+                let type=document.querySelector("#type").value;
+                let brand=document.querySelector("#brand").value;
+                let image=document.querySelector("#image").value;
+                let result="";
+                const url="";
+                fetch(url).then(res=>res.text()).then(res=>{
+                    result=res;
+                    if(result.trim()=="success")
+                    {
+                        document.querySelector("#saved").innerHTML="success";
+
+                    }
+                    else
+                    {
+                        document.querySelector("#saved").innerHTML=res;
+                        setTimeout(function(){window.location.reload();},3000);
+                    }
+                });
+            }
+           
+
+        </script>
+    </body>
+</html>
